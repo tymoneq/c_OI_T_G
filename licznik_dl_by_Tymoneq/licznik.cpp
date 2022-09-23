@@ -71,7 +71,7 @@ int main()
                 cout << 0 << "\n";
 
             else
-                cout << suma % 10 << '\n';
+                cout << suma % 10 - 1 << '\n';
         }
     }
 
