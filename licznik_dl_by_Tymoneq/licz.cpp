@@ -20,8 +20,8 @@ int main()
     // int suma_dl[n - 1] = {0};
 
     cin >> number;
-    std::cin.clear();
-    std::cin.ignore( std::numeric_limits < std::streamsize >::max(), '\n' );
+    //std::cin.clear();
+    //std::cin.ignore( std::numeric_limits < std::streamsize >::max(), '\n' );
     
     for (int i = n - 1; i > 0; i--)
     {
@@ -30,8 +30,8 @@ int main()
     }
 
     cin >> number;
-    std::cin.clear();
-    std::cin.ignore( std::numeric_limits < std::streamsize >::max(), '\n' );
+    //std::cin.clear();
+    //std::cin.ignore( std::numeric_limits < std::streamsize >::max(), '\n' );
     
     for (int i = n - 1; i > 0; i--)
     {
@@ -41,18 +41,16 @@ int main()
     }
     for (int i = 0; i < z; i++)
     {
-        // cout << dl_wew[1] << "\n";
+       
         char operacja{};
         int x{0}, y{0};
         cin >> operacja >> x;
-        //std::cin.clear();
-        //std::cin.ignore( std::numeric_limits < std::streamsize >::max(), '\n' );
+        
         
         if (operacja == 'W')
         {
             cin >> y;
-            //std::cin.clear();
-            //std::cin.ignore( std::numeric_limits < std::streamsize >::max(), '\n' );
+            
 
             dl_wew[n - x] = y;
             suma_dl[n - x] = dl_wew[n - x] + dl_zew[n - x];
@@ -60,8 +58,7 @@ int main()
         else if (operacja == 'Z')
         {
             cin >> y;
-            //std::cin.clear();
-            //std::cin.ignore( std::numeric_limits < std::streamsize >::max(), '\n' );
+            
 
             dl_zew[n - x] = y;
             suma_dl[n - x] = dl_wew[n - x] + dl_zew[n - x];

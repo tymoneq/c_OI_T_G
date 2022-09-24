@@ -33,45 +33,65 @@ int main()
             int suma{0};
             int temp_dl_wew = dl_wew[dl_wew.size() - x] - 48;
             int temp_dl_zew = dl_zew[dl_zew.size() - x] - 48;
-            int temp_dl_wew_1 = dl_wew[dl_wew.size() - x + 1] - 48;
-            int temp_dl_zew_1 = dl_zew[dl_zew.size() - x + 1] - 48;
-            if (temp_dl_zew_1 + temp_dl_wew_1 >= 10)
-            {
-                suma = temp_dl_wew + temp_dl_zew + 1;
-            }
-            else if (temp_dl_zew_1 + temp_dl_wew_1 == 9)
-            {
-
-                for (int j = dl_wew.size() - x + 2; j < dl_wew.size(); j++)
-                {
-
-                    int temp_1 = dl_wew[j] - 48;
-                    int temp_2 = dl_zew[j] - 48;
-                    if (temp_1 + temp_2 >= 10)
-                    {
-                        suma = temp_dl_wew + temp_dl_zew + 1;
-                        break;
-                    }
-                    else if (temp_1 + temp_2 == 9)
-                        continue;
-                    else if (temp_1 + temp_2 < 9)
-                    {
-                        suma = temp_dl_wew + temp_dl_zew;
-                        break;
-                    }
-                }
-            }
-            else
+            if (n - x == n - 1)
             {
                 suma = temp_dl_wew + temp_dl_zew;
+                cout << suma % 10 << "\n";
             }
-            if (suma % 10 == -5)
-                cout << 1 << "\n";
-            else if (suma % 10 == -6)
-                cout << 0 << "\n";
-
             else
-                cout << suma % 10 - 1 << '\n';
+            {
+                int temp_dl_wew_1 = dl_wew[dl_wew.size() - x + 1] - 48;
+                int temp_dl_zew_1 = dl_zew[dl_zew.size() - x + 1] - 48;
+                if (temp_dl_zew_1 + temp_dl_wew_1 >= 10)
+                {
+
+                    suma = temp_dl_wew + temp_dl_zew + 1;
+                }
+                else if (temp_dl_zew_1 + temp_dl_wew_1 == 9)
+                {
+                    bool test = false;
+                    for (int j = dl_wew.size() - x + 2; j < dl_wew.size(); j++)
+                    {
+
+                        int temp_1 = dl_wew[j] - 48;
+                        int temp_2 = dl_zew[j] - 48;
+                        if (temp_1 + temp_2 >= 10)
+                        {
+
+                            suma = temp_dl_wew + temp_dl_zew + 1;
+                            test = true;
+                            break;
+                        }
+                        else if (temp_1 + temp_2 == 9)
+                            continue;
+                        else if (temp_1 + temp_2 <= 8)
+                        {
+                            test = true;
+
+                            suma = temp_dl_wew + temp_dl_zew;
+                            break;
+                        }
+                    }
+                    if (!test)
+                    {
+                        suma = temp_dl_wew + temp_dl_zew;
+                    }
+                }
+                else if (temp_dl_wew_1 + temp_dl_zew_1 <= 8)
+                {
+                    suma = temp_dl_wew + temp_dl_zew;
+                }
+                if (suma % 10 == -5)
+                {
+                    cout << 1 << "\n";
+                }
+                else if (suma % 10 == -6)
+                {
+                    cout << 0 << "\n";
+                }
+                else
+                    cout << suma % 10 << '\n';
+            }
         }
     }
 
