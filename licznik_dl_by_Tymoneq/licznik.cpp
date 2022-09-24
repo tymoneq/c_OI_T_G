@@ -14,81 +14,98 @@ int main()
 
     for (int i = 0; i < z; i++)
     {
-        int x{}, indeks{};
+        int x{};
         cin >> operacja >> x;
         if (operacja == "W")
         {
             cin >> y;
-            indeks = dl_wew.size() - x;
-            dl_wew[indeks] = y;
+            dl_wew[n - 1 - x] = y;
         }
         else if (operacja == "Z")
         {
             cin >> y;
-            indeks = dl_zew.size() - x;
-            dl_zew[indeks] = y;
+            dl_zew[n - 1 - x] = y;
         }
         else if (operacja == "S")
         {
             int suma{0};
-            int temp_dl_wew = dl_wew[dl_wew.size() - x] - 48;
-            int temp_dl_zew = dl_zew[dl_zew.size() - x] - 48;
+            int temp_dl_wew = dl_wew[n - 1 - x] - 48;
+            int temp_dl_zew = dl_zew[n - 1 - x] - 48;
             if (n - x == n - 1)
             {
+                // cout << "aaaa"
+                //<< "\n";
                 suma = temp_dl_wew + temp_dl_zew;
                 cout << suma % 10 << "\n";
             }
             else
             {
-                int temp_dl_wew_1 = dl_wew[dl_wew.size() - x + 1] - 48;
-                int temp_dl_zew_1 = dl_zew[dl_zew.size() - x + 1] - 48;
+                int temp_dl_wew_1 = dl_wew[n - x] - 48;
+                int temp_dl_zew_1 = dl_zew[n - x] - 48;
                 if (temp_dl_zew_1 + temp_dl_wew_1 >= 10)
                 {
-
+                    // cout << "bbbb"
+                    //    << "\n";
                     suma = temp_dl_wew + temp_dl_zew + 1;
                 }
                 else if (temp_dl_zew_1 + temp_dl_wew_1 == 9)
                 {
-                    bool test = false;
-                    for (int j = dl_wew.size() - x + 2; j < dl_wew.size(); j++)
+                    if (n - 1 >= n - x + 2)
                     {
-
-                        int temp_1 = dl_wew[j] - 48;
-                        int temp_2 = dl_zew[j] - 48;
-                        if (temp_1 + temp_2 >= 10)
+                        bool test = false;
+                        for (int j = n - 1 - x + 2; j < n - 1; j++)
                         {
 
-                            suma = temp_dl_wew + temp_dl_zew + 1;
-                            test = true;
-                            break;
+                            int temp_1 = dl_wew[j] - 48;
+                            int temp_2 = dl_zew[j] - 48;
+                            if (temp_1 + temp_2 >= 10)
+                            {
+                                // cout << "cccc"
+                                //  << "\n";
+                                suma = temp_dl_wew + temp_dl_zew + 1;
+                                test = true;
+                                break;
+                            }
+                            else if (temp_1 + temp_2 == 9)
+
+                                continue;
+
+                            else if (temp_1 + temp_2 <= 8)
+                            {
+                                test = true;
+                                // cout << "dddd"
+                                //      << "\n";
+                                suma = temp_dl_wew + temp_dl_zew;
+                                break;
+                            }
                         }
-                        else if (temp_1 + temp_2 == 9)
-                            continue;
-                        else if (temp_1 + temp_2 <= 8)
+                        if (!test)
                         {
-                            test = true;
-
+                            // cout << "eeeee"
+                            //      << "\n";
                             suma = temp_dl_wew + temp_dl_zew;
-                            break;
                         }
                     }
-                    if (!test)
+                    else
                     {
+                        // cout << "BBBBB"
+                        //      << "\n";
                         suma = temp_dl_wew + temp_dl_zew;
                     }
                 }
                 else if (temp_dl_wew_1 + temp_dl_zew_1 <= 8)
                 {
+                    // cout << "ffff"
+                    //      << "\n";
                     suma = temp_dl_wew + temp_dl_zew;
                 }
                 if (suma % 10 == -5)
-                {
+
                     cout << 1 << "\n";
-                }
+
                 else if (suma % 10 == -6)
-                {
+
                     cout << 0 << "\n";
-                }
                 else
                     cout << suma % 10 << '\n';
             }
