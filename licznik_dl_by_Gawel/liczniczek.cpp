@@ -29,22 +29,6 @@ void dodawanie(vector<int> &a, vector<int> &b, vector<int> &wynik, int &indeks)
     }
 }
 
-void dodawanieS(string &a, string &b, string &wynik, int &indeks)
-{
-    for(int i = a.size()-1; i >= n-indeks; i--)
-    {
-        if(b[i] + a[i] + wynik[i] >= 10)
-        {
-            wynik[i] = (b[i] + a[i]+ wynik[i])%10;
-            wynik[i-1] += 1;            
-        }
-        else
-        {
-            wynik[i] += (b[i] + a[i]);
-        }
-    }
-}
-
 void vis(string &s, vector<int> &v)
 {
     for(int i = 1; i <= s.size(); i++)
@@ -98,7 +82,7 @@ int main()
         {
             vector<int> dl_sum(n); 
             cin >> indeks;
-            dodawanieS(dl_wew_in, dl_zew_in, dl_sum_in, indeks);
+            dodawanie(dl_wewnetrzy, dl_zewnetrzny, dl_sum, indeks);
 
             // cout << "wew: ";
             // vectorIntPrint(dl_wewnetrzy);
