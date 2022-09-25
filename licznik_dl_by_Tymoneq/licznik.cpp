@@ -86,6 +86,7 @@ int main()
                                 else if (temp_1 + temp_2 == 9)
                                 {
                                     indeks = x - j;
+                                    long_string = true;
                                     continue;
                                 }
 
@@ -99,10 +100,7 @@ int main()
                                 }
                             }
                             if (!test)
-                            {
-                                long_string = true;
                                 suma = temp_dl_wew + temp_dl_zew;
-                            }
                         }
                     }
                     else
