@@ -84,5 +84,8 @@
     "clang-diagnostic-error",
     "clang-diagnostic-error",
     "clang-diagnostic-c++20-compat"
-  ]
+  ],
+  "docwriter.progress.trackFunctions": false,
+  "docwriter.progress.trackMethods": false,
+  "docwriter.progress.trackClasses": true
 }
