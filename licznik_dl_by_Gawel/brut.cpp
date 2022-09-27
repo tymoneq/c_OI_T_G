@@ -28,7 +28,6 @@ void dodawanie(vector<int> &a, vector<int> &b, vector<int> &wynik, int &indeks)
         }
     }
 }
-
 void vis(string &s, vector<int> &v)
 {
     for(int i = 1; i <= s.size(); i++)
@@ -68,32 +67,20 @@ int main()
         {
             cin >> indeks >> c;
             dl_wewnetrzy[n-indeks] = c;
-            // cout << "wew: ";
-            // vectorIntPrint(dl_wewnetrzy);
         }
         else if(wczytywanie == 'Z')
         {
             cin >> indeks >> c;
             dl_zewnetrzny[n-indeks] = c;
-            // cout << "zew: ";
-            // vectorIntPrint(dl_zewnetrzny);
         }
         else
         {
             vector<int> dl_sum(n); 
+            int suma;
             cin >> indeks;
             dodawanie(dl_wewnetrzy, dl_zewnetrzny, dl_sum, indeks);
-
-            // cout << "wew: ";
-            // vectorIntPrint(dl_wewnetrzy);
-            // cout << "zew: ";
-            // vectorIntPrint(dl_zewnetrzny);
-            // cout << "sum: ";
-            // vectorIntPrint(dl_sum);
-
-            printf("%d\n", dl_sum[dl_sum.size()-indeks]);
+            printf("%d\n", dl_sum[n-indeks]);
         }
     }
-
     return 0;
 }
