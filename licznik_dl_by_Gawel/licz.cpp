@@ -119,7 +119,7 @@ int main()
                 {
                     auto itr = mapka.end();
                     itr--;
-                    if((*itr).first > indeks)
+                    if(n-(*itr).first > indeks)
                     {
                         printf("%d\n", (dl_wewnetrzy[n-indeks] + dl_zewnetrzny[n-indeks])%10);
                     }
