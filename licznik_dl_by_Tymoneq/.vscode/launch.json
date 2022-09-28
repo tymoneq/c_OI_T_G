@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/OI/c_OI_T_G/licznik_dl_by_Tymoneq",
-      "program": "d:/OI/c_OI_T_G/licznik_dl_by_Tymoneq/build/Debug/outDebug",
+      "cwd": "I:/github/c_OI_T_G/licznik_dl_by_Tymoneq/licz",
+      "program": "I:/github/c_OI_T_G/licznik_dl_by_Tymoneq/licz.exe",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
