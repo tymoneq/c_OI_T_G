@@ -55,56 +55,49 @@ int main()
 
             else
             {
-                
+                bool first_10 = false;
+                bool first_8 = false;
                 auto more = more_than_10.lower_bound(x);
-                cout << "more " << *more  <<"\n";
-                if (*more >= x)
+
+                if (more == more_than_10.begin())
+                    first_10 = true;
+                else if (more == more_than_10.end())
                 {
-                    int j = 1;
-                    cout << "more " << *more  <<"\n";
-                    while (true)
-                    {
-                        auto more = more_than_10.lower_bound(x - j);
-                        if ((*more < x))
-                            break;
-                        ++j;
-                    }
+                    more--;
                 }
+                else
+                    more--;
+
                 auto less = less_than_8.lower_bound(x);
-                cout << " less " << *less << "\n";
-                if ((*less >= x))
+
+                if (less == less_than_8.begin())
+                    first_8 = true;
+                else if (less == less_than_8.end())
                 {
-                    int j = 1;
-                    cout << " less " << *less << "\n";
-                    while (true)
-                    {
-                        auto less = less_than_8.lower_bound(x - j);
-                        if ((*less < x))
-                            break;
-                        ++j;
-                    }
+                    less--;
                 }
-                cout << "more " << *more << " less " << *less << "\n";
-                if ((*more > *less))
+                else
+                    less--;
+
+                // cout << "more " << *more << " less " << *less << "\n";
+                if (first_8)
+                {
+                    suma = suma = temp_dl_wew + temp_dl_zew + 1;
+                }
+                else if (first_10)
+                {
+                    suma = temp_dl_wew + temp_dl_zew;
+                }
+                else if ((*more > *less))
                 {
                     suma = temp_dl_wew + temp_dl_zew + 1;
                 }
-                else if (*more < *less)
+                else if ((*more < *less))
                 {
                     suma = temp_dl_wew + temp_dl_zew;
                 }
             }
-            for (auto el : more_than_10)
-            {
-                cout << "more than 10 " << el << " ";
-            }
-            cout << "\n";
-            for (auto el : less_than_8)
-            {
-                cout << "less than 8 " << el << " ";
-            }
-            cout << "\n";
-            cout << "\n";
+
             cout << suma % 10 << "\n";
         }
         else if (operacja == 'W')
