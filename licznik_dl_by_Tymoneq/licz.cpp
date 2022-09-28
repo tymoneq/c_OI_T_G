@@ -9,7 +9,7 @@ int main()
     cin.tie(0);
     cout.tie(0);
     string dl_wew{}, dl_zew{};
-    string operacja{};
+
     char y{};
     unsigned int n{}, z{};
     set<unsigned int> more_than_10;
@@ -38,9 +38,9 @@ int main()
     for (int i = 0; i < z; i++)
     {
         int x{};
-
+        char operacja{};
         cin >> operacja >> x;
-        if (operacja == "W")
+        if (operacja == 'W')
         {
             cin >> y;
 
@@ -70,7 +70,7 @@ int main()
             cout << "\n";
             cout << "\n";
         }
-        else if (operacja == "Z")
+        else if (operacja == 'Z')
         {
             cin >> y;
 
@@ -100,15 +100,20 @@ int main()
             cout << "\n";
             cout << "\n";
         }
-        else if (operacja == "S")
+        else if (operacja == 'S')
         {
+            cout << "aaabbb"
+                 << "\n";
             unsigned int suma{0};
             unsigned int temp_dl_wew = dl_wew[n - 1 - x] - 48;
             unsigned int temp_dl_zew = dl_zew[n - 1 - x] - 48;
             unsigned int index_more_than10 = 0;
             unsigned int index_less_than8 = 0;
 
-            if (n - x == n - 1)
+            cout << "aaa"
+                 << "\n";
+
+            if (x == 1)
             {
 
                 suma = temp_dl_wew + temp_dl_zew;
