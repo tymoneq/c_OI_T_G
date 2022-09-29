@@ -55,44 +55,44 @@ int main()
 
             else
             {
-                bool first_10 = false;
-                bool first_8 = false;
+                unsigned int first_10 = 0;
+                unsigned int first_8 = 0;
+
                 auto more = more_than_10.lower_bound(x);
 
                 if (more == more_than_10.begin())
-                    first_10 = true;
+                    first_10 = 0;
                 else if (more == more_than_10.end())
                 {
                     more--;
+                    first_10 = *more;
                 }
                 else
+                {
                     more--;
-
+                    first_10 = *more;
+                }
                 auto less = less_than_8.lower_bound(x);
 
                 if (less == less_than_8.begin())
-                    first_8 = true;
+                    first_8 = 0;
                 else if (less == less_than_8.end())
                 {
                     less--;
+                    first_8 = *less;
                 }
                 else
+                {
                     less--;
-
+                    first_8 = *less;
+                }
                 // cout << "more " << *more << " less " << *less << "\n";
-                if (first_8)
-                {
-                    suma = suma = temp_dl_wew + temp_dl_zew + 1;
-                }
-                else if (first_10)
-                {
-                    suma = temp_dl_wew + temp_dl_zew;
-                }
-                else if ((*more > *less))
+
+                if ((first_10 > first_8))
                 {
                     suma = temp_dl_wew + temp_dl_zew + 1;
                 }
-                else if ((*more < *less))
+                else if ((first_10 < first_8))
                 {
                     suma = temp_dl_wew + temp_dl_zew;
                 }
