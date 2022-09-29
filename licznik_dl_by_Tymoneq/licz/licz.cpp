@@ -96,6 +96,10 @@ int main()
                 {
                     suma = temp_dl_wew + temp_dl_zew;
                 }
+                else if ((first_10 == 0) && (first_8 == 0))
+                {
+                    suma = temp_dl_wew + temp_dl_zew;
+                }
             }
 
             cout << suma % 10 << "\n";
