@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "i:/github/c_OI_T_G/cukiernia_by_Tymoneq",
-      "program": "i:/github/c_OI_T_G/cukiernia_by_Tymoneq/build/Debug/outDebug",
+      "cwd": "I:/github/c_OI_T_G/cukiernia_by_Tymoneq",
+      "program": "I:/github/c_OI_T_G/cukiernia_by_Tymoneq/cuk.exe",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

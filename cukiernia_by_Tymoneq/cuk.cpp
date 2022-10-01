@@ -16,10 +16,13 @@ int main()
     cin.tie(0);
     cout.tie(0);
     int n;
-    unsigned int wynik = 0, koszt_pt = 0, droz, rog, pon;
+    unsigned int droz, rog, pon, a_range = 0, mod_3 = 0;
+    unsigned long long koszt_pt = 0;
     cin >> n;
-    vector<vector<int>> v(n);
 
+    a_range = n / 3;
+    mod_3 = n % 3;
+    vector<vector<int>> v(n);
     for (int i = 0; i < n; i++)
     {
 
@@ -30,50 +33,47 @@ int main()
         v[i].push_back(pon);
         v[i].push_back(rog);
     }
+
     // first column sort
     make_heap(v.begin(), v.end());
-    for (auto el : v)
+    for (int i = 0; i < a_range; i++)
     {
-        cout << el[0] << " " << el[1] << " " << el[2] << "\n";
-        if (el[0] > el[1] + el[2])
-            koszt_pt -= el[0];
-
-        else
-        {
-
-            break;
-        }
+        // if (v[i][1] == 0 && v[i][2] == 0)
+        // {
+        //     koszt_pt -= v[i][0];
+        //     i -= 1;
+        // }
+        // else
+            koszt_pt -= v[i][0];
     }
-    cout << endl;
-    // second column sort
+
+    //  second column sort
     sort(v.begin(), v.end(), sortcol);
-    for (auto el : v)
+    for (int i = 0; i < a_range; i++)
     {
-        cout << el[0] << " " << el[1] << " " << el[2] << "\n";
-        if (el[1] >= el[0] + el[2])
-            koszt_pt -= el[1];
 
-        else
-        {
-
-            break;
-        }
+        // if (v[i][0] == 0 && v[i][2] == 0)
+        // {
+        //     koszt_pt -= v[i][1];
+        //     i -= 1;
+        // }
+        // else
+            koszt_pt -= v[i][1];
     }
-    cout << endl;
-    // third column sort
+
+    //  third column sort
 
     sort(v.begin(), v.end(), sortcol2);
-    for (auto el : v)
+    for (int i = 0; i < a_range; i++)
     {
-        cout << el[0] << " " << el[1] << " " << el[2] << "\n";
-        if (el[2] >= el[0] + el[1])
-            koszt_pt -= el[2];
 
-        else
-        {
-
-            break;
-        }
+        // if (v[i][0] == 0 && v[i][1] == 0)
+        // {
+        //     koszt_pt -= v[i][2];
+        //     i -= 1;
+        // }
+        // else
+            koszt_pt -= v[i][2];
     }
     cout << koszt_pt << "\n";
     return 0;
