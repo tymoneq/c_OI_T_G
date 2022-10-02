@@ -16,19 +16,20 @@ int main()
     cin.tie(0);
     cout.tie(0);
     int n;
-    unsigned int droz, rog, pon, a_range = 0, mod_3 = 0;
-    unsigned long long koszt_pt = 0;
+    unsigned int droz, rog, pon, trzy = 0, mod_3 = 0, suma = 0;
+    long long koszt = 0, suma_pon = 0, suma_rog = 0, suma_droz = 0;
     cin >> n;
 
-    a_range = n / 3;
+    trzy = n / 3;
     mod_3 = n % 3;
     vector<vector<int>> v(n);
     for (int i = 0; i < n; i++)
     {
 
         cin >> droz >> pon >> rog;
-        koszt_pt += droz + pon + rog;
-
+        suma_droz += droz;
+        suma_pon += pon;
+        suma_rog += rog;
         v[i].push_back(droz);
         v[i].push_back(pon);
         v[i].push_back(rog);
@@ -36,45 +37,43 @@ int main()
 
     // first column sort
     make_heap(v.begin(), v.end());
-    for (int i = 0; i < a_range; i++)
+    for (int i = 0; i < trzy; i++)
     {
-        // if (v[i][1] == 0 && v[i][2] == 0)
-        // {
-        //     koszt_pt -= v[i][0];
-        //     i -= 1;
-        // }
-        // else
-            koszt_pt -= v[i][0];
+        if (suma_droz != 0)
+        {
+            suma_droz -= v[i][0];
+            v.erase(v.begin());
+        }
     }
 
     //  second column sort
     sort(v.begin(), v.end(), sortcol);
-    for (int i = 0; i < a_range; i++)
+    for (int i = 0; i < trzy; i++)
     {
-
-        // if (v[i][0] == 0 && v[i][2] == 0)
-        // {
-        //     koszt_pt -= v[i][1];
-        //     i -= 1;
-        // }
-        // else
-            koszt_pt -= v[i][1];
+        if (suma_pon != 0)
+        {
+            suma_pon -= v[i][1];
+            v.erase(v.begin());
+        }
     }
 
     //  third column sort
 
     sort(v.begin(), v.end(), sortcol2);
-    for (int i = 0; i < a_range; i++)
+    for (int i = 0; i < trzy; i++)
+    {
+        if (suma_rog != 0)
+        {
+            suma_rog -= v[i][2];
+            v.erase(v.begin());
+        }
+    }
+    for (int i = 0; i < mod_3; i++)
     {
 
-        // if (v[i][0] == 0 && v[i][1] == 0)
-        // {
-        //     koszt_pt -= v[i][2];
-        //     i -= 1;
-        // }
-        // else
-            koszt_pt -= v[i][2];
+        suma += max(max(v[i][0], v[i][1]), v[i][2]);
     }
-    cout << koszt_pt << "\n";
+    koszt = suma_droz + suma_pon + suma_rog - suma;
+    cout << koszt << "\n";
     return 0;
 }
