@@ -1,0 +1,105 @@
+ if (max_droz < div_3)
+    {
+        if (max_rog > div_3)
+        {
+            for (int j = 0; j < div_3 - max_pon; j++)
+            {
+                int temp = 1000000001;
+                for (int i = 0; i < n; i++)
+                {
+                    if (v[i][0] != v[i][2])
+                    {
+                        if (v[i][1] < temp)
+                            temp = v[i][0];
+                    }
+                }
+                koszt_pt += temp;
+            }
+        }
+        if (max_pon > div_3)
+        {
+            for (int j = 0; j < div_3 - max_pon; j++)
+            {
+                int temp = 1000000001;
+                for (int i = 0; i < n; i++)
+                {
+                    if (v[i][0] != v[i][1])
+                    {
+                        if (v[i][1] < temp)
+                            temp = v[i][0];
+                    }
+                }
+                koszt_pt += temp;
+            }
+        }
+    }
+    if (max_pon < div_3)
+    {
+        if (max_rog > div_3)
+        {
+            for (int j = 0; j < div_3 - max_pon; j++)
+            {
+                int temp = 1000000001;
+                for (int i = 0; i < n; i++)
+                {
+                    if (v[i][1] != v[i][2])
+                    {
+                        if (v[i][1] < temp)
+                            temp = v[i][1];
+                    }
+                }
+                koszt_pt += temp;
+            }
+        }
+        if (max_droz > div_3)
+        {
+            for (int j = 0; j < div_3 - max_pon; j++)
+            {
+                int temp = 1000000001;
+                for (int i = 0; i < n; i++)
+                {
+                    if (v[i][1] != v[i][0])
+                    {
+                        if (v[i][1] < temp)
+                            temp = v[i][1];
+                    }
+                }
+                koszt_pt += temp;
+            }
+        }
+    }
+    if (max_rog < div_3)
+    {
+        if (max_pon > div_3)
+        {
+            for (int j = 0; j < div_3 - max_pon; j++)
+            {
+                int temp = 1000000001;
+                for (int i = 0; i < n; i++)
+                {
+                    if (v[i][2] != v[i][1])
+                    {
+                        if (v[i][1] < temp)
+                            temp = v[i][2];
+                    }
+                }
+                koszt_pt += temp;
+            }
+        }
+        if (max_droz > div_3)
+        {
+            for (int j = 0; j < div_3 - max_pon; j++)
+            {
+                int temp = 1000000001;
+                for (int i = 0; i < n; i++)
+                {
+                    if (v[i][2] != v[i][0])
+                    {
+                        if (v[i][1] < temp)
+                            temp = v[i][2];
+                    }
+                }
+                koszt_pt += temp;
+            }
+        }
+    }
