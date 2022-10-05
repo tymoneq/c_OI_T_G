@@ -3,7 +3,8 @@
 using namespace std;
 
 int n, z;
-map<int, pair<int, int>> mapka;
+set<int> bigger_than_10;
+set<int> low_than_8;
 
 void vectorIntPrint(vector<int> &vector)
 {
@@ -42,12 +43,16 @@ void vis(string &s, string &s1, vector<int> &v, vector<int> &v1)
         v1[i] = tmp1;
         if(v[i] + v1[i] >= 10)
         {
-            mapka[i] = pair<int, int>(v[i], v1[i]);
+            bigger_than_10.insert(i);
+        }
+        else if(v[i] + v1[i] <= 8)
+        {
+            low_than_8.insert(i);
         }
 
     }
 // for(auto itr = mapka.begin(); itr != mapka.end(); itr++)  //map<char, int>::iterator itr = mp.begin();
-//     cout << (*itr).first << " " << (*itr).second.first << " " << itr->second.second <<endl;                   //(*itr).first === itr->first
+    // cout << *itr <<endl;                   //(*itr).first === itr->first
 }
 
 int main()
@@ -67,8 +72,6 @@ int main()
 
     vis(dl_wew_in, dl_zew_in, dl_wewnetrzy, dl_zewnetrzny);
 
-// printf("\n\n");
-
     for(int i = 0; i < z; i++)
     {
         char wczytywanie;
@@ -77,6 +80,25 @@ int main()
         {
             cin >> indeks >> c;
             dl_wewnetrzy[n-indeks] = c;
+
+            if(low_than_8.count(n-indeks) == 1)
+                low_than_8.erase(n-indeks);
+
+            if(bigger_than_10.count(n-indeks) == 1)
+                bigger_than_10.erase(n-indeks);
+
+            if(dl_zewnetrzny[n-indeks] + dl_wewnetrzy[n-indeks] >= 10)
+            {
+                bigger_than_10.insert(n-indeks);
+            }
+            if(dl_zewnetrzny[n-indeks] + dl_wewnetrzy[n-indeks] <= 8)
+            {
+                low_than_8.insert(n-indeks);
+            }
+            
+            // for(auto itr = mapka.begin(); itr != mapka.end(); itr++)  //map<char, int>::iterator itr = mp.begin();
+                // cout << (*itr).first << " " << (*itr).second.first << " " << itr->second.second <<endl;
+            // if()
             // cout << "wew: ";
             // vectorIntPrint(dl_wewnetrzy);
         }
@@ -84,10 +106,26 @@ int main()
         {
             cin >> indeks >> c;
             dl_zewnetrzny[n-indeks] = c;
-            // cout << "zew: ";
-            // vectorIntPrint(dl_zewnetrzny);
+
+            if(low_than_8.count(n-indeks) == 1)
+                low_than_8.erase(n-indeks);
+
+            if(bigger_than_10.count(n-indeks) == 1)
+                bigger_than_10.erase(n-indeks);
+
+            if(dl_zewnetrzny[n-indeks] + dl_wewnetrzy[n-indeks] >= 10)
+            {
+                bigger_than_10.insert(n-indeks);
+            }
+            if(dl_zewnetrzny[n-indeks] + dl_wewnetrzy[n-indeks] <= 8)
+            {
+                low_than_8.insert(n-indeks);
+            }
+
+            // for(auto itr = mapka.begin(); itr != mapka.end(); itr++)  //map<char, int>::iterator itr = mp.begin();
+                // cout << (*itr).first << " " << (*itr).second.first << " " << itr->second.second <<endl;
         }
-        else
+        else    //! liczenie
         {
             vector<int> dl_sum(n); 
             int suma;
@@ -115,18 +153,37 @@ int main()
                     printf("%d\n", (dl_wewnetrzy[n-indeks] + dl_zewnetrzny[n-indeks])%10);
 
                 }
-                else
-                {
-                    auto itr = mapka.end();
-                    itr--;
-                    if(n-(*itr).first > indeks)
+                else     //todo jeśli poprzednie == 9
+                {   
+                    if(low_than_8.begin() == low_than_8.end() && bigger_than_10.begin() != bigger_than_10.end())
                     {
-                        printf("%d\n", (dl_wewnetrzy[n-indeks] + dl_zewnetrzny[n-indeks])%10);
+                        auto itr10 = bigger_than_10.lower_bound(n-indeks);
+                        if(*itr10 > n-indeks)
+                            suma = dl_wewnetrzy[n-indeks] + dl_zewnetrzny[n-indeks] + 1;
+                        else
+                            suma = dl_wewnetrzy[n-indeks] + dl_zewnetrzny[n-indeks];
+                        cout << suma % 10 << "\n";
+                        // continue;
+                    }                    
+                    if(bigger_than_10.begin() == bigger_than_10.end() && low_than_8.begin() != low_than_8.end())
+                    {
+                        suma = dl_wewnetrzy[n-indeks] + dl_zewnetrzny[n-indeks];
+                        cout << suma % 10 << "\n";
+                        // continue;
                     }
-                    else
+
+                    if(bigger_than_10.begin() != bigger_than_10.end() && low_than_8.begin() != low_than_8.end())
                     {
-                        dodawanie(dl_wewnetrzy, dl_zewnetrzny, dl_sum, indeks);
-                        printf("%d\n", dl_sum[n-indeks]);
+                        auto itr8 = low_than_8.lower_bound(n-indeks);
+                        auto itr10 = bigger_than_10.lower_bound(n-indeks);
+                        if(*itr8 < *itr10)
+                        {
+                            printf("%d\n", (dl_wewnetrzy[n-indeks] + dl_zewnetrzny[n-indeks])%10);
+                        }
+                        else
+                        {
+                            printf("%d\n", ((dl_wewnetrzy[n-indeks] + dl_zewnetrzny[n-indeks])%10)+1);
+                        }
                     }
                 }
             }
