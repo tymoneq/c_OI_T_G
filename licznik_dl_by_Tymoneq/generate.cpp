@@ -6,12 +6,12 @@ int main()
 {
     ofstream dane;
     dane.open("data.txt");
-    dane << 1000000 << " " << 1000000 << "\n";
-    for (int i = 0; i < 1000000; i++)
+    dane << 10 << " " << 100 << "\n";
+    for (int i = 0; i < 10; i++)
         dane << 9;
 
     dane << "\n";
-    for (int i = 0; i < 1000000; i++)
+    for (int i = 0; i < 10; i++)
         dane << 0;
 
     dane << "\n";
