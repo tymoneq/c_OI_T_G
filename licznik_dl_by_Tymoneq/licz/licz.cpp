@@ -47,7 +47,8 @@ int main()
             unsigned int suma{0};
             unsigned int temp_dl_wew = dl_wew[n - 1 - x] - 48;
             unsigned int temp_dl_zew = dl_zew[n - 1 - x] - 48;
-            
+            unsigned int index_more_than10 = 0;
+            unsigned int index_less_than8 = 0;
 
             if (x == 1)
                 suma = temp_dl_wew + temp_dl_zew;
