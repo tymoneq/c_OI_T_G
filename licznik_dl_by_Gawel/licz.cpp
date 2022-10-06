@@ -4,7 +4,7 @@ using namespace std;
 
 int n, z;
 set<int> bigger_than_10;
-set<int> low_than_8;
+set<int> less_than_8;
 
 void vectorIntPrint(vector<int> &vector)
 {
@@ -47,7 +47,7 @@ void vis(string &s, string &s1, vector<int> &v, vector<int> &v1)
         }
         else if(v[i] + v1[i] <= 8)
         {
-            low_than_8.insert(i);
+            less_than_8.insert(i);
         }
 
     }
@@ -81,8 +81,8 @@ int main()
             cin >> indeks >> c;
             dl_wewnetrzy[n-indeks] = c;
 
-            if(low_than_8.count(n-indeks) == 1)
-                low_than_8.erase(n-indeks);
+            if(less_than_8.count(n-indeks) == 1)
+                less_than_8.erase(n-indeks);
 
             if(bigger_than_10.count(n-indeks) == 1)
                 bigger_than_10.erase(n-indeks);
@@ -93,7 +93,7 @@ int main()
             }
             if(dl_zewnetrzny[n-indeks] + dl_wewnetrzy[n-indeks] <= 8)
             {
-                low_than_8.insert(n-indeks);
+                less_than_8.insert(n-indeks);
             }
             
             // for(auto itr = mapka.begin(); itr != mapka.end(); itr++)  //map<char, int>::iterator itr = mp.begin();
@@ -107,8 +107,8 @@ int main()
             cin >> indeks >> c;
             dl_zewnetrzny[n-indeks] = c;
 
-            if(low_than_8.count(n-indeks) == 1)
-                low_than_8.erase(n-indeks);
+            if(less_than_8.count(n-indeks) == 1)
+                less_than_8.erase(n-indeks);
 
             if(bigger_than_10.count(n-indeks) == 1)
                 bigger_than_10.erase(n-indeks);
@@ -119,7 +119,7 @@ int main()
             }
             if(dl_zewnetrzny[n-indeks] + dl_wewnetrzy[n-indeks] <= 8)
             {
-                low_than_8.insert(n-indeks);
+                less_than_8.insert(n-indeks);
             }
 
             // for(auto itr = mapka.begin(); itr != mapka.end(); itr++)  //map<char, int>::iterator itr = mp.begin();
@@ -127,8 +127,10 @@ int main()
         }
         else    //! liczenie
         {
-            vector<int> dl_sum(n); 
-            int suma;
+            int suma{0};
+            unsigned int index_more_than10 = 0;
+            unsigned int index_less_than8 = 0;
+
             cin >> indeks;
             if(indeks == 1)
             {
@@ -155,41 +157,52 @@ int main()
                 }
                 else     //todo jeśli poprzednie == 9
                 {   
-                    if(low_than_8.begin() == low_than_8.end() && bigger_than_10.begin() != bigger_than_10.end())
+                    
+                    auto less = less_than_8.lower_bound(n-indeks);
+                    auto more = bigger_than_10.lower_bound(n-indeks);
+                    int first10, first8;
+                    if(*more == n-indeks)
                     {
-                        auto itr10 = bigger_than_10.lower_bound(n-indeks);
-                        if(*itr10 > n-indeks)
-                            suma = dl_wewnetrzy[n-indeks] + dl_zewnetrzny[n-indeks] + 1;
-                        else
-                            suma = dl_wewnetrzy[n-indeks] + dl_zewnetrzny[n-indeks];
-                        cout << suma % 10 << "\n";
-                        // continue;
-                    }                    
-                    if(bigger_than_10.begin() == bigger_than_10.end() && low_than_8.begin() != low_than_8.end())
+                        more++;
+                        first10 = *more;
+                    }
+                    if(*less == n-indeks)
                     {
-                        suma = dl_wewnetrzy[n-indeks] + dl_zewnetrzny[n-indeks];
-                        cout << suma % 10 << "\n";
-                        // continue;
+                        less++;
+                        first8 = *less;
                     }
 
-                    if(bigger_than_10.begin() != bigger_than_10.end() && low_than_8.begin() != low_than_8.end())
+                    if(more == bigger_than_10.end())
                     {
-                        auto itr8 = low_than_8.lower_bound(n-indeks);
-                        auto itr10 = bigger_than_10.lower_bound(n-indeks);
-                        if(*itr8 < *itr10)
-                        {
-                            printf("%d\n", (dl_wewnetrzy[n-indeks] + dl_zewnetrzny[n-indeks])%10);
-                        }
-                        else
-                        {
-                            printf("%d\n", ((dl_wewnetrzy[n-indeks] + dl_zewnetrzny[n-indeks])%10)+1);
-                        }
+                        first10 = n+1;
                     }
+                    else
+                        first10 = *more;
+
+                    if(less == less_than_8.end())
+                    {
+                        first8 = n+1;
+                    }
+                    else
+                        first8 = *less;
+
+
+                    
+                    
+                    if(first8 > first10)
+                    {
+                        printf("%d\n", ((dl_wewnetrzy[n-indeks] + dl_zewnetrzny[n-indeks])+1)%10);//!
+                    }
+                    else
+                    {
+                        printf("%d\n", (dl_wewnetrzy[n-indeks] + dl_zewnetrzny[n-indeks])%10);//!
+                    }
+                   
+                    
                 }
             }
                 
         }
     }
-
     return 0;
 }

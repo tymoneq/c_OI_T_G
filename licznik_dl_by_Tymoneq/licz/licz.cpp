@@ -1,208 +1,158 @@
 #include <bits/stdc++.h>
-//https://szkopul.edu.pl/problemset/problem/w3anjkOGa2eMEBt_-GYEosat/site/?key=statement
+
 using namespace std;
-
-int n, z;
-set<int> bigger_than_10;
-set<int> less_than_8;
-
-void vectorIntPrint(vector<int> &vector)
-{
-    if(!vector.size())
-        return;
-    for (int element : vector)
-        cout << element << " ";
-    cout << endl;
-}
-
-void dodawanie(vector<int> &a, vector<int> &b, vector<int> &wynik, int &indeks)
-{
-    for(int i = a.size()-1; i >= n-indeks; i--)
-    {
-        if(b[i] + a[i] + wynik[i] >= 10)
-        {
-            wynik[i] = (b[i] + a[i]+ wynik[i])%10;
-            wynik[i-1] += 1;            
-        }
-        else
-        {
-            wynik[i] += (b[i] + a[i]);
-        }
-    }
-}
-
-void vis(string &s, string &s1, vector<int> &v, vector<int> &v1)
-{
-    for(int i = 1; i <= s.size(); i++)
-    {
-        int tmp = s[i-1];
-        int tmp1 = s1[i-1];
-        tmp -= 48;
-        tmp1 -= 48;
-        v[i] = tmp;
-        v1[i] = tmp1;
-        if(v[i] + v1[i] >= 10)
-        {
-            bigger_than_10.insert(i);
-        }
-        else if(v[i] + v1[i] <= 8)
-        {
-            less_than_8.insert(i);
-        }
-
-    }
-// for(auto itr = mapka.begin(); itr != mapka.end(); itr++)  //map<char, int>::iterator itr = mp.begin();
-    // cout << *itr <<endl;                   //(*itr).first === itr->first
-}
 
 int main()
 {
-    string dl_wew_in;
-    string dl_zew_in;
-    int indeks, c;
+
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    string dl_wew{}, dl_zew{};
+
+    char y{};
+    unsigned int n{}, z{};
+    set<unsigned int> more_than_10;
+    set<unsigned int> less_than_8;
+
     cin >> n >> z;
+    cin >> dl_wew >> dl_zew;
 
-    string dl_sum_in;
-    dl_sum_in.resize(n);
-    
-    cin >> dl_wew_in >> dl_zew_in;
-
-    vector<int> dl_wewnetrzy(n); 
-    vector<int> dl_zewnetrzny(n); 
-
-    vis(dl_wew_in, dl_zew_in, dl_wewnetrzy, dl_zewnetrzny);
-
-    for(int i = 0; i < z; i++)
+    for (int i = 0; i < n - 1; i++)
     {
-        char wczytywanie;
-        cin >> wczytywanie;
-        if(wczytywanie == 'W')
+        unsigned int suma = 0;
+        unsigned int temp_1 = dl_wew[i] - 48;
+        unsigned int temp_2 = dl_zew[i] - 48;
+
+        suma = temp_1 + temp_2;
+        if (suma <= 8)
         {
-            cin >> indeks >> c;
-            dl_wewnetrzy[n-indeks] = c;
-
-            if(less_than_8.count(n-indeks) == 1)
-                less_than_8.erase(n-indeks);
-
-            if(bigger_than_10.count(n-indeks) == 1)
-                bigger_than_10.erase(n-indeks);
-
-            if(dl_zewnetrzny[n-indeks] + dl_wewnetrzy[n-indeks] >= 10)
-            {
-                bigger_than_10.insert(n-indeks);
-            }
-            if(dl_zewnetrzny[n-indeks] + dl_wewnetrzy[n-indeks] <= 8)
-            {
-                less_than_8.insert(n-indeks);
-            }
-            
-            // for(auto itr = mapka.begin(); itr != mapka.end(); itr++)  //map<char, int>::iterator itr = mp.begin();
-                // cout << (*itr).first << " " << (*itr).second.first << " " << itr->second.second <<endl;
-            // if()
-            // cout << "wew: ";
-            // vectorIntPrint(dl_wewnetrzy);
+            less_than_8.insert(n - 1 - i);
         }
-        else if(wczytywanie == 'Z')
+        else if (suma >= 10)
         {
-            cin >> indeks >> c;
-            dl_zewnetrzny[n-indeks] = c;
-
-            if(less_than_8.count(n-indeks) == 1)
-                less_than_8.erase(n-indeks);
-
-            if(bigger_than_10.count(n-indeks) == 1)
-                bigger_than_10.erase(n-indeks);
-
-            if(dl_zewnetrzny[n-indeks] + dl_wewnetrzy[n-indeks] >= 10)
-            {
-                bigger_than_10.insert(n-indeks);
-            }
-            if(dl_zewnetrzny[n-indeks] + dl_wewnetrzy[n-indeks] <= 8)
-            {
-                less_than_8.insert(n-indeks);
-            }
-
-            // for(auto itr = mapka.begin(); itr != mapka.end(); itr++)  //map<char, int>::iterator itr = mp.begin();
-                // cout << (*itr).first << " " << (*itr).second.first << " " << itr->second.second <<endl;
+            more_than_10.insert(n - 1 - i);
         }
-        else    //! liczenie
+    }
+
+    for (int i = 0; i < z; i++)
+    {
+        int x{};
+        char operacja{};
+        cin >> operacja >> x;
+
+        if (operacja == 'S')
         {
-            int suma{0};
+
+            unsigned int suma{0};
+            unsigned int temp_dl_wew = dl_wew[n - 1 - x] - 48;
+            unsigned int temp_dl_zew = dl_zew[n - 1 - x] - 48;
             unsigned int index_more_than10 = 0;
             unsigned int index_less_than8 = 0;
 
-            cin >> indeks;
-            if(indeks == 1)
-            {
-                suma = dl_wewnetrzy[n-indeks] + dl_zewnetrzny[n-indeks];
-// cout << suma % 10 << " ind\n";
-                cout << suma % 10 << "\n";
-            }
+            if (x == 1)
+                suma = temp_dl_wew + temp_dl_zew;
+
             else
             {
-                if(dl_wewnetrzy[n-indeks+1] + dl_zewnetrzny[n-indeks+1] >= 10)
+                unsigned int first_10 = 0;
+                unsigned int first_8 = 0;
+
+                auto more = more_than_10.lower_bound(x);
+
+                if (more == more_than_10.begin())
+                    first_10 = 0;
+                else if (more == more_than_10.end())
                 {
-                    suma = dl_wewnetrzy[n-indeks] + dl_zewnetrzny[n-indeks] + 1;
-                    // vectorIntPrint(dl_wewnetrzy);
-                    // vectorIntPrint(dl_zewnetrzny);
-                    // printf("%d : %d : %d : %d\n", suma%10, n-indeks, dl_wewnetrzy[n-indeks], dl_zewnetrzny[n-indeks]);
-                    cout << suma % 10 << "\n";
+                    more--;
+                    first_10 = *more;
                 }
-                else if(dl_wewnetrzy[n-indeks+1] + dl_zewnetrzny[n-indeks+1] <= 8)
+                else
                 {
-                    // vectorIntPrint(dl_wewnetrzy);
-                    // vectorIntPrint(dl_zewnetrzny);
-                    printf("%d\n", (dl_wewnetrzy[n-indeks] + dl_zewnetrzny[n-indeks])%10);
-
+                    more--;
+                    first_10 = *more;
                 }
-                else     //todo jeśli poprzednie == 9
-                {   
-                    
-                    auto less = less_than_8.lower_bound(n-indeks);
-                    auto more = bigger_than_10.lower_bound(n-indeks);
-                    int first10, first8;
-                    if(*more == n-indeks)
-                    {
-                        more++;
-                        first10 = *more;
-                    }
-                    if(*less == n-indeks)
-                    {
-                        less++;
-                        first8 = *less;
-                    }
+                auto less = less_than_8.lower_bound(x);
 
-                    if(more == bigger_than_10.end())
-                    {
-                        first10 = n+1;
-                    }
-                    else
-                        first10 = *more;
+                if (less == less_than_8.begin())
+                    first_8 = 0;
+                else if (less == less_than_8.end())
+                {
+                    less--;
+                    first_8 = *less;
+                }
+                else
+                {
+                    less--;
+                    first_8 = *less;
+                }
+                // cout << "more " << *more << " less " << *less << "\n";
 
-                    if(less == less_than_8.end())
-                    {
-                        first8 = n+1;
-                    }
-                    else
-                        first8 = *less;
-
-
-                    
-                    
-                    if(first8 > first10)
-                    {
-                        printf("%d\n", ((dl_wewnetrzy[n-indeks] + dl_zewnetrzny[n-indeks])+1)%10);//!
-                    }
-                    else
-                    {
-                        printf("%d\n", (dl_wewnetrzy[n-indeks] + dl_zewnetrzny[n-indeks])%10);//!
-                    }
-                   
-                    
+                if ((first_10 > first_8))
+                {
+                    suma = temp_dl_wew + temp_dl_zew + 1;
+                }
+                else if ((first_10 < first_8))
+                {
+                    suma = temp_dl_wew + temp_dl_zew;
+                }
+                else if ((first_10 == 0) && (first_8 == 0))
+                {
+                    suma = temp_dl_wew + temp_dl_zew;
                 }
             }
-                
+
+            cout << suma % 10 << "\n";
+        }
+        else if (operacja == 'W')
+        {
+            cin >> y;
+
+            if (dl_wew[n - 1 - x] - 48 + dl_zew[n - 1 - x] - 48 >= 10)
+                more_than_10.erase(x);
+
+            else if (dl_wew[n - 1 - x] - 48 + dl_zew[n - 1 - x] - 48 <= 8)
+                less_than_8.erase(x);
+
+            dl_wew[n - 1 - x] = y;
+
+            if (y - 48 + dl_zew[n - 1 - x] - 48 >= 10)
+                more_than_10.insert(x);
+
+            else if (y - 48 + dl_zew[n - 1 - x] - 48 <= 8)
+                less_than_8.insert(x);
+        }
+        else if (operacja == 'Z')
+        {
+            cin >> y;
+
+            if (dl_wew[n - 1 - x] - 48 + dl_zew[n - 1 - x] - 48 >= 10)
+                more_than_10.erase(x);
+
+            else if (dl_wew[n - 1 - x] - 48 + dl_zew[n - 1 - x] - 48 <= 8)
+                less_than_8.erase(x);
+
+            dl_zew[n - 1 - x] = y;
+
+            if (dl_wew[n - 1 - x] - 48 + y - 48 >= 10)
+                more_than_10.insert(x);
+
+            else if (dl_wew[n - 1 - x] - 48 + y - 48 <= 8)
+                less_than_8.insert(x);
+
+            // for (auto el : more_than_10)
+            // {
+            //     cout << "more than 10 " << el << " ";
+            // }
+            // cout << "\n";
+            // for (auto el : less_than_8)
+            // {
+            //     cout << "less than 8 " << el << " ";
+            // }
+            // cout << "\n";
+            // cout << "\n";
         }
     }
+
     return 0;
 }
