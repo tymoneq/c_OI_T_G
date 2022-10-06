@@ -47,7 +47,6 @@ int main()
             unsigned int suma{0};
             unsigned int temp_dl_wew = dl_wew[n - 1 - x] - 48;
             unsigned int temp_dl_zew = dl_zew[n - 1 - x] - 48;
-           
 
             if (x == 1)
                 suma = temp_dl_wew + temp_dl_zew;
@@ -61,25 +60,17 @@ int main()
 
                 if (more == more_than_10.begin())
                     first_10 = 0;
-                else if (more == more_than_10.end())
-                {
-                    more--;
-                    first_10 = *more;
-                }
                 else
                 {
                     more--;
                     first_10 = *more;
                 }
+
                 auto less = less_than_8.lower_bound(x);
 
                 if (less == less_than_8.begin())
                     first_8 = 0;
-                else if (less == less_than_8.end())
-                {
-                    less--;
-                    first_8 = *less;
-                }
+
                 else
                 {
                     less--;
