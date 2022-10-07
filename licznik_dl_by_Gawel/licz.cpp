@@ -161,12 +161,30 @@ int main()
                     auto less = less_than_8.lower_bound(n-indeks);
                     auto more = bigger_than_10.lower_bound(n-indeks);
                     int first10, first8;
-                    if(*more == n-indeks)
+                    bool czy10 = true;
+                    bool czy8 = true;
+                    if(more == bigger_than_10.end())
+                    {
+                        czy10 = false;
+                        first10 = n+1;
+                    }
+                    else
+                        first10 = *more;
+
+                    if(less == less_than_8.end())
+                    {
+                        czy8 = false;
+                        first8 = n+1;
+                    }
+                    else
+                        first8 = *less;
+
+                    if(*more == n-indeks && czy10)
                     {
                         more++;
                         first10 = *more;
                     }
-                    if(*less == n-indeks)
+                    if(*less == n-indeks && czy8)
                     {
                         less++;
                         first8 = *less;
@@ -179,7 +197,7 @@ int main()
                     else
                         first10 = *more;
 
-                    if(less == less_than_8.end())
+                    if(less == less_than_8.end() )
                     {
                         first8 = n+1;
                     }
