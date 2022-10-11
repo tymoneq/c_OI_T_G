@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 // propaguj spadanie
 using namespace std;
-map<int, bool[100001]> Gaps;
+// map<int, bool[100001]> Gaps;
 map<int, vector<int>> gaps;
 int main()
 {
@@ -18,7 +18,7 @@ int main()
             int b;
             cin >> b;
             gaps[i].push_back(b);
-            Gaps[i][b] = 1;
+            // Gaps[i][b] = 1;
         }
     }
 
@@ -32,10 +32,29 @@ int main()
 
         else
         {
-            for (int j = 0; j < gaps[x].size(); j++)
+            if (x == n)
             {
-                int first_gap = gaps[x][j];
-                for (int k = 0;)
+                cout << "Not done yet "
+                     << "\n";
+            }
+            else
+            {
+                int wynik = 0;
+                for (int j = 0; j < gaps[x].size(); j++)
+                {
+                    wynik = j;
+                    int lower = gaps[x][j];
+                    for (int k = x + 1; k <= n; k++)
+                    {
+                        auto p_lower = lower_bound(gaps[k].begin(), gaps[k].end(), lower);
+                        lower = *p_lower;
+                        if (p_lower == gaps[x + 1].end())
+                        {
+                            break;
+                        }
+                    }
+                }
+                cout << wynik << "\n";
             }
         }
     }
