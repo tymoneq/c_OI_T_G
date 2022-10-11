@@ -1,4 +1,3 @@
-// użyj seta int  grafu z bfs dopisz nazwisko do maila
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -33,19 +32,18 @@ int main()
         if (oper == 'Z')
         {
             // bfs
-            vector<set<int>> odl(n + 1);
 
             bool *visited = new bool[n + 1]{0};
-
-            vector<int> q;
-            q.push_back(1);
+            vector<set<int>> odl(n + 1);
+            queue<int> q;
+            q.push(1);
             visited[1] = true;
 
-            for (int i = 0; i < q.size(); i++)
+            while (!q.empty())
             {
 
-                int a = q[i];
-
+                int a = q.front();
+                q.pop();
                 for (auto b : G[a])
                 {
                     if (!visited[b.first])
@@ -55,13 +53,22 @@ int main()
 
                         odl[b.first].insert(b.second);
                         visited[b.first] = true;
-                        q.push_back(b.first);
+                        q.push(b.first);
                     }
                 }
-                if (visited[city])
+                if (odl[city].size() == m)
+                {
+                    cout << m << "\n";
                     break;
+                }
+                if (visited[city])
+                {
+                    cout << odl[city].size() << "\n";
+                    break;
+                }
             }
-            cout << odl[city].size() << "\n";
+
+            delete[] visited;
         }
         else if (oper == 'B')
         {
@@ -71,30 +78,62 @@ int main()
             int city_a = street_num[city].first;
             int city_b = street_num[city].second;
 
+            sort(G[city_a].begin(), G[city_a].end());
+            sort(G[city_b].begin(), G[city_b].end());
             vector<pair<int, int>> *pV = &G[city_a];
-            for (auto el = pV->begin(); el != pV->end(); el++)
+            if (city_b >= n / 2)
             {
-
-                if (el->first == city_b)
+                for (auto el = pV->rbegin(); el != pV->rend(); el++)
                 {
-                    el->second = biciak;
 
-                    break;
+                    if (el->first == city_b)
+                    {
+                        el->second = biciak;
+
+                        break;
+                    }
                 }
             }
+            else
+            {
+                for (auto el = pV->begin(); el != pV->end(); el++)
+                {
 
+                    if (el->first == city_b)
+                    {
+                        el->second = biciak;
+
+                        break;
+                    }
+                }
+            }
             pV = &G[city_b];
-            for (auto el = pV->begin(); el != pV->end(); el++)
+            if (city_a >= n / 2)
             {
-
-                if (el->first == city_a)
+                for (auto el = pV->rbegin(); el != pV->rend(); el++)
                 {
-                    el->second = biciak;
 
-                    break;
+                    if (el->first == city_a)
+                    {
+                        el->second = biciak;
+
+                        break;
+                    }
                 }
             }
-            
+            else
+            {
+                for (auto el = pV->begin(); el != pV->end(); el++)
+                {
+
+                    if (el->first == city_a)
+                    {
+                        el->second = biciak;
+
+                        break;
+                    }
+                }
+            }
         }
     }
 
